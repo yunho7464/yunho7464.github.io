@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://yunho7464.github.io/sitemap.xml
+Sitemap: https://yunho7464.github.io/yunho7464.github.io//sitemap.xml
