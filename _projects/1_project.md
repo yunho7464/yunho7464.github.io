@@ -1,11 +1,11 @@
 ---
 layout: page
-title: project 1
-description: a project with a background image
-img: assets/img/12.jpg
+title: Pitch-Perfect -- Personalized Sonification for Accessible Data Visualization
+description: 
+img: 
 importance: 1
-category: work
-related_publications: einstein1956investigations, einstein1950meaning
+category: lead author projects
+related_publications: 
 ---
 
 Every project has a beautiful feature showcase page.
