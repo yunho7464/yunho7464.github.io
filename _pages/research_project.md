@@ -6,7 +6,7 @@ description:
 nav: true
 nav_order: 1
 display_categories: [lead author projects, collaborated projects]
-horizontal: false
+horizontal: true
 ---
 
 <!-- pages/projects.md -->
