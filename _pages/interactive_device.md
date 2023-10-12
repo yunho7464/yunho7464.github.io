@@ -2,9 +2,10 @@
 layout: page
 title: interactive device
 permalink: /interactive_device/
-description: Fun interactive gadgets.
+description: 
 nav: true
 nav_order: 2
-display_categories: 
+display_categories: [fun gadgets]
 horizontal: false
 ---
+
