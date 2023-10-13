@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Audiovisual Integration in Ensemble Perception 	
+title: Emokit – Assisting Affect Communication Between Couples 	
 description:
 img: assets/img/
 importance: 1
