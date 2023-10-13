@@ -1,8 +1,8 @@
 ---
 layout: page
 permalink: /artwork/
-title: artworks
-description: Dance and Photography
+title: artwork
+description: 
 nav: true
 nav_order: 3
 ---
