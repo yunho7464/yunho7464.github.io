@@ -8,9 +8,9 @@ category: lead author projects
 related_publications: 
 ---
 
-<b> Motivation: </b>
+<b> Research Question: </b>
 
-Audio charts make data accessible for the visually impaired populations. However, it can mislead listeners if the mapping function between data and audio display is not aligned with one's internal mapping.
+Audio charts make data accessible for the visually impaired populations. However, it can mislead listeners if the mapping function between data and audio display is not aligned with one's internal mapping. Therefore, we studied the individual differences of the internal mapping among users.
 
 <b> Method: </b>
 1. In the user study, participants first were presented with two audio clips that represented the minimum and maximum values. Then, they listened to three audio clips and instructed to estimate the encoded data value.
