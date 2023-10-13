@@ -10,7 +10,8 @@ related_publications:
 
 <b> About this Project: </b>
 
-We investigated if utilizing electrical muscle stimulation (EMS) to automate a movement can help people perform better in a multitasking scenario. To be specific, we designed a movement task (repetitive hand movements) and a cognitive task (n-back), and instructed the participants to do both tasks simultaneously. We found that with the assistance of EMS to automate the movement task, participants showed better performance, less physical demand, and less cognitive load than the baseline condition (do both tasks by themselves).
+We explored the potential of electrical muscle stimulation (EMS) to enhance performance in multitasking settings. Specifically, we introduced a movement task alongside a cognitive task, requiring participants to execute both simultaneously. Results indicated that using EMS to automate the movement task led to improved performance, reduced physical demand, and decreased cognitive load compared to the baseline where participants managed both tasks unaided.
+
 
 
 <b> My main contributions: </b>

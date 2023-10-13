@@ -11,10 +11,10 @@ related_publications:
 
 <b> Research Question: </b>
 
-Proprioception is the perception of the position of one's own limbs, and metacognition is monitoring one's own cognitive process. In this study, we investigated older and younger adults’ metacognition of proprioception to see if the abilitu to monitor perceived position of limbs degenerate overtime. 
+Proprioception refers to the perception of one's limb positions, while metacognition involves monitoring one's own cognitive process. In our research, we explored metacognition of proprioception in both older and younger adults to determine if the capability to self-assess limb positioning declines with age.
 
 <b> Method: </b>
-Participants placed their hands on the study apparatus like the following figures. They were instructed to answer if the two consecutive positions they felt were consistent or inconsistent. After that, they rated their confidence level (how confident they were that their answer were correct).
+Participants positioned their hands on the apparatus as depicted in the subsequent figures. They were then tasked with determining whether two successive positions felt consistent or inconsistent. Subsequently, they assessed their confidence in the accuracy of their response.
 
 <div class="row">
     <div class="col-sm-6 mt-3 mt-md-0">

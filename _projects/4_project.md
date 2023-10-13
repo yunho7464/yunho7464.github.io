@@ -9,8 +9,7 @@ related_publications:
 ---
 
 <b> About this Project: </b>
-
-To address the challenges faced by individuals with low vision during reading, we developed a gaze-aware tool that provides visual and auditory feedback based on the user's gaze patterns. Primary features encompass highlighting the intended reading line and aiding in the recognition of difficult words.
+In response to reading difficulties encountered by those with low vision, we created a gaze-aware tool offering both visual and auditory cues tailored to user's gaze patterns. Primary features encompass highlighting the intended reading line and aiding in the recognition of difficult words.
 
 
 <b> My main contributions: </b>
