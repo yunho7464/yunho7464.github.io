@@ -25,7 +25,7 @@ Currently collaborating with [Prof. Yea-Seul Kim](https://pages.cs.wisc.edu/~ye
 
 Prior to that, I worked with [Prof. Su-Ling Yeh](http://epa.psy.ntu.edu.tw/SuLingYeh_eng.html) (National Taiwan University) and [Prof. Yi-Chuan Chen](https://en.mmc.edu.tw/medicine-eng/Teacher_Detail.asp?hidPage1=4&hidPeopleCatID=1&hidPeopleID=130) (Mackay Medical College) on proprioception and multisensory research.
 
-I am actively seeking PhD positions in HCI, aiming to create geture-based interfaces accomodating each user's unique body control capabilities.
+I am actively seeking PhD positions in HCI, aiming to create geture-based interfaces accommodating each user's unique body control capabilities.
 
 <!-- Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
