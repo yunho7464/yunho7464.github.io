@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Pitch-Perfect -- Personalized Sonification for Accessible Data Visualization
-description: 
+description: Prof. Yea-Seul Kim (Visualization Lab, Computer Sciences, UW-Madison)
 img: 
 importance: 1
 category: lead author projects

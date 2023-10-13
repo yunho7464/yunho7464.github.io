@@ -1,7 +1,7 @@
 ---
 layout: page
 title: SplitBody -- Freeing-up the Mind while Multitasking via Muscle Stimulation	
-description: 
+description: PI -- Prof. Pedro Lopes (Human Computer Integration Lab, Computer Science, University of Chicago), Collaborator -- Romain Nith
 img: 
 importance: 3
 category: collaborated projects
