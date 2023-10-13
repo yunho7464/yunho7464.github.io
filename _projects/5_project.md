@@ -1,22 +1,20 @@
 ---
 layout: page
 title: Audiovisual Integration in Ensemble Perception 	
-description: PI -- Prof. Yi-Chuan Chen (Dept. of Medicine, Mackay Medical College), Collaborator -- 
+description: PI -- Prof. Yi-Chuan Chen (Dept. of Medicine, Mackay Medical College), Collaborator -- Chien-Chun Yang
 img: 
-importance: 4
+importance: 5
 category: collaborated projects
 related_publications: 
 ---
 
 <b> About this Project: </b>
 
-To address the challenges faced by individuals with low vision during reading, we developed a gaze-aware tool that provides visual and auditory feedback based on the user's gaze patterns. Primary features encompass highlighting the intended reading line and aiding in the recognition of difficult words.
+Ensemble perception is the ability of the visual system to quickly extract aggregate statistical information (e.g., average) from groups of similar objects. Audiovisual integration examines how vision is influenced by concurrent auditory stimuli, and vice versa. In this study, we explored whether sounds of varying pitches could impact the perceived average in visual ensemble perception.
 
 
 <b> My main contributions: </b>
  
-•	Created a word-difficulty dataset for low-vision people by identifying hesitations and misreads
+•	Reviewed audiovisual integration study protocols and identified mismatches across experimental conditions, facilitating timely debugging of the experiment
 
-•	Developed hypotheses about the causes of misreads, referring to natural language processing (NLP) and psycholinguistic research 
-
-•	Analyzed gaze data to investigate difficult-word detection algorithms
+•	Conducted 90+ study sessions containing behavioral experiments and after-study interviews
