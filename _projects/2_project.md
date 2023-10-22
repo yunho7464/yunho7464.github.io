@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Age Differences in Metacognition of Proprioception	
-description: Advisor -- Prof. Su-Ling Yeh (Explorer of Perception and Attention Lab, Psychology, NTU)
+description: Advisor -- Prof. Su-Ling Yeh & Prof. Yi-Chuan Chen (Explorer of Perception and Attention Lab, Psychology, NTU)
 img: 
 importance: 2
 category: lead author projects
