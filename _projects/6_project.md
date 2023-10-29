@@ -13,10 +13,10 @@ Effective and instant affect communication is vital for relationships. Yet, duri
 
 <div class="row">
     <div class="col-sm-6 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/Emokit_interaction.png" title="individaul difference" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/Emokit_interaction.png" title="Emokit_interaction" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm-6 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/Emokit_prototype.png" title="normalized" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/Emokit_prototype.png" title="Emokit_prototype" class="img-fluid rounded z-depth-1" %}
     </div>
     
 </div>
