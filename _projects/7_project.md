@@ -8,7 +8,7 @@ category: fun gadgets
 related_publications: 
 ---
 
-For the theme "Unnecessary Inventions," we crafted a whimsical device with a cat's paw that keeps pressing the enter key whenever a user sets their mug on its accompanying coaster.
+For the theme "Unnecessary Inventions," we crafted a whimsical device with a cat's paw that keeps pressing the delete key whenever a user sets their mug on its accompanying coaster.
 
 
 <div class="row">
