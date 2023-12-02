@@ -19,7 +19,7 @@ For the theme "Unnecessary Inventions," we crafted a whimsical device with a cat
 </div>
 
 <div class="caption">
-    A user put a cup of water on the coaster, actuating the cat's paw to press the enter key. 
+    A user put a cup of water on the coaster, actuating the cat's paw to press the delete key. 
     
     The device was built with a photoresistor, a servo motor, and Arduino.
 
