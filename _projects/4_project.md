@@ -9,15 +9,14 @@ related_publications:
 ---
 
 <b> About this Project: </b>
-In response to reading difficulties encountered by those with low vision, we created a gaze-aware tool offering both visual and auditory cues tailored to user's gaze patterns. Primary features encompass highlighting the intended reading line and aiding in the recognition of difficult words.
+In response to reading difficulties encountered by people with low vision, we designed gaze-aware reading aids offering visual and auditory cues tailored to the user's gaze patterns. Primary features include highlighting the intended reading line and reading difficult words aloud.
 
 
 <b> My main contributions: </b>
  
-•	Created a word-difficulty dataset for low-vision people by identifying hesitations and misreads
+•   Created a word-difficulty dataset for low-vision people by identifying hesitations and misreads
 
-•	Developed hypotheses about the causes of misreads, referring to natural language processing (NLP) and psycholinguistic research 
+•   Developed hypotheses about the causes of misreads, referring to natural language processing (NLP) and psycholinguistic research 
 
-•	Analyzed gaze data to investigate difficult-word detection algorithms
-
+•   Analyzed gaze data to investigate difficult word detection algorithms
 

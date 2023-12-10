@@ -8,7 +8,8 @@ category: fun gadgets
 related_publications: 
 ---
 
-Effective and instant affect communication is vital for relationships. Yet, during work hours, couples often struggle to find a convenient communication channel, as texting becomes challenging. To address this, we introduced Emokits —- a pair of tangible user interfaces (TUIs) tailored for emotional communication between couples. As depicted in the figure below, a user can place an object on their Emokit to signify their emotion, which will then be mirrored on their partner's Emokit, providing an engaging and straightforward communication method.
+Effective and instant affect communication is vital for relationships. Yet, couples often struggle to find a convenient communication channel during work hours, as texting becomes challenging. To address this, we introduced Emokits —- a pair of tangible user interfaces (TUIs) tailored for emotional communication between couples. As depicted in the figure below, a user can place an object on their Emokit to signify their emotion, which will then be mirrored on their partner's Emokit, providing an engaging and straightforward communication method.
+
 
 
 <div class="row">
