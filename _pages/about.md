@@ -19,7 +19,8 @@ latest_posts: false  # includes a list of the newest posts
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false  # includes social icons at the bottom of the page
 ---
-Hello! I am Yun. I work on HCI research, and I graduated from [National Taiwan University] (https://www.ntu.edu.tw/english/) with a B.S. in Psychology.
+
+Hello! I am Yun. I work on HCI research, and I graduated from [National Taiwan University](https://www.ntu.edu.tw/english/) with a B.S. in Psychology.
 
 My research applies cognitive science to novel interactions and assistive technology, focusing on nonverbal communication between humans and devices. I believe knowledge of human cognition, particularly body movements and perceptions, is critical for designing effective nonverbal communication in digital tools. For body movements, I am intrigued by the potential of human motions in designing the device’s new input and output modalities. For perceptions, I am passionate about making information accessible and correctly received by studying the individual differences in sensory processes.
 
