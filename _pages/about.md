@@ -24,7 +24,7 @@ Hello! I am Yun. I work on HCI research, and I graduated from [National Taiwan U
 
 My research applies cognitive science to novel interactions and assistive technology, focusing on nonverbal communication between humans and devices. I believe knowledge of human cognition, particularly body movements and perceptions, is critical for designing natural human-computer interactions. For body movements, I am intrigued by the potential of human motions in designing the device’s new input and output modalities. For perceptions, I am passionate about making information accessible by studying the individual differences in sensory processes.
 
-I am actively seeking PhD positions in HCI, aspiring to bridge cognitive science and technology, ensuring usability in advancing digital tools.
+I am actively seeking PhD positions in Human-Computer Interaction (HCI). My goal is to bridge cognitive science and technology, ensuring usability in advancing digital tools.
 
 <!-- Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
