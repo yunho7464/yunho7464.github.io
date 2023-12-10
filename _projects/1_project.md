@@ -10,12 +10,12 @@ related_publications:
 
 <b> Research Question: </b>
 
-Audio charts make data accessible for the visually impaired populations. However, it can mislead listeners if the mapping function between data and audio display is not aligned with one's internal mapping. Therefore, we studied the individual differences of the internal mapping among users.
+Audio charts make data accessible for the visually impaired populations. However, it can mislead listeners if the mapping function between data and audio display is not aligned with one's internal mapping. Therefore, we studied the individual differences of the internal mappings among users.
 
 <b> Method: </b>
 1. In the user study, participants were first presented with two audio clips representing the minimum and maximum values. Then, they listened to three audio clips and were instructed to estimate the encoded data value.
-2. Applying a power law function to each participant's data to investigate individual differences in pitch-to-data mapping.
-3. Contructed the personalized models with varied numbers of data points and normalized/non-normalized data to investigate the properties of the models.
+2. Applying a power law function to each participant's data to investigate individual differences in pitch-to-data mapping
+3. Contructed the personalized models with varied numbers of data points and normalized/non-normalized data to investigate the properties of the models
 
 <b> Main Findings: </b>
  
