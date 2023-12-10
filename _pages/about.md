@@ -19,13 +19,11 @@ latest_posts: false  # includes a list of the newest posts
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false  # includes social icons at the bottom of the page
 ---
-With research experience in psychology and Human-Computer Interaction, as well as a life-long passion for dance, my interest lies in contributing my expertise in experimental psychology and understanding of body movements to the field of HCI. 
+Hello! I am Yun. I work on HCI research, and I graduated from [National Taiwan University] (https://www.ntu.edu.tw/english/) with a B.S. in Psychology.
 
-Currently collaborating with [Prof. Yea-Seul Kim](https://pages.cs.wisc.edu/~yeaseulkim/), [Prof. Yuhang Zhao](https://www.yuhangz.com) at the University of Wisconsin-Madison, and [Prof. Pedro Lopes](https://plopes.org) at the University of Chicago. I’m working on projects related to Accessible Data Visualization, Augmenting Low-Vision Reading with Eye-tracking Technique, and Assisting Cognitive-demanding Scenarios with Electrical Muscle Stimulation. 
+My research applies cognitive science to novel interactions and assistive technology, focusing on nonverbal communication between humans and devices. I believe knowledge of human cognition, particularly body movements and perceptions, is critical for designing effective nonverbal communication in digital tools. For body movements, I am intrigued by the potential of human motions in designing the device’s new input and output modalities. For perceptions, I am passionate about making information accessible and correctly received by studying the individual differences in sensory processes.
 
-Prior to that, I worked with [Prof. Su-Ling Yeh](http://epa.psy.ntu.edu.tw/SuLingYeh_eng.html) (National Taiwan University) and [Prof. Yi-Chuan Chen](https://en.mmc.edu.tw/medicine-eng/Teacher_Detail.asp?hidPage1=4&hidPeopleCatID=1&hidPeopleID=130) (Mackay Medical College) on proprioception and multisensory research.
-
-I am actively seeking PhD positions in HCI, aiming to innovate interactions that accommodate people’s innate way of processing information, providing accessible and evident-based support to users. 
+I am actively seeking PhD positions in HCI, aspiring to bridge cognitive science and technology, ensuring usability in advancing digital tools.
 
 <!-- Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
