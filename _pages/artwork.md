@@ -11,9 +11,9 @@ nav_order: 3
 
 
 <h4> Perceived Time in Pandemic </h4>
-A piece of work I choreographed in October, 2020. 
+A piece of work I choreographed in October 2020. 
 
-It's about the distorted (and undistorted for some) time perception caused by the quarantine measures during pandemic.
+It's about the distorted (and undistorted for some) time perception caused by the quarantine measures during the pandemic.
 
 <div class="row">
     <div class="col-sm-6 mt-3 mt-md-0">
