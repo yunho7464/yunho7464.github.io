@@ -3,5 +3,6 @@ logo: /assets/img/profile-picture-2024.JPG
 description: PhD Student, University of Chicago
 # show_downloads: true
 theme: jekyll-theme-minimal
-github: 
-  is_project_page: false
+github:
+  zip_url: https://scholar.google.com/citations?user=Rv2Z0EoAAAAJ&hl=en
+  another_url: google scholar
