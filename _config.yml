@@ -1,7 +1,6 @@
 title: Yun Ho
-logo: /assets/img/profile-picture-2024.jpg
-github:
-  is_project_page: false
+logo: /assets/img/profile-picture-2024.JPG
 #description: text below image
 # show_downloads: true
 theme: jekyll-theme-minimal
+github: is_project_page: false
