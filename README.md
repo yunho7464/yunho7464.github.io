@@ -4,14 +4,27 @@
 
 ## #HCI #body movement #perceptions
 
+**I am coming to CHI'25 at Yokohama. We are presenting our paper: Adaptive Electrical Muscle Stimulation Improves Muscle Memory with talk + demo! 
+Demo: Monday 6:00-8:00 pm, Tuesday + Wednesday morning coffee breaks
+Talk: Thursday, 1 May @ 9:12 am (Annex Hall F206)
+Looking forward to meeting you all!**
+
 I am a first-year Computer Science PhD student at the University of Chicago, advised by [Professor Pedro Lopes](http://lab.plopes.org).
 
 My research focuses on Human-Computer Interaction. I play with body movements and perceptions, and I am curious about how people feel when a device **moves you**.
 
-I have a background in psychology. Aside from HCI, I love dancing and [photography](https://www.instagram.com/flattenedcopy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==)
+I have a background in psychology. Aside from HCI, I love dancing and [photography](https://www.instagram.com/flattenedcopy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==).
 
 
 ## Publications
+### Adaptive Electrical Muscle Stimulation Improves Muscle Memory
+Siya Choudhary*, Romain Nith*, Yun Ho*, Jas Brooks, Mithil Guruvugari, Pedro Lopes. CHI'25 (full paper)
+[CHI'25 paper](https://lab.plopes.org/published/2025-CHI-AdaptiveEMS.pdf) [video](https://www.youtube.com/watch?v=VqqpRu269QE)
+
+Electrical muscle stimulation (EMS) can assist in learning motor skills. However, existing EMS systems provide static demonstration—actuating the correct movements, regardless of the user’s learning progress. Instead, we propose a novel adaptive-EMS that changes its guidance strategy based on the participant’s performance. The adaptive-EMS dynamically adjusts its guidance: (1) demonstrate by playing the entire sequence when errors are frequent; (2) correct by lifting incorrect fingers and actuating the correct one when errors are moderate; and (3) warn by lifting incorrect fingers when errors are low. We found that adaptive-EMS improved learning outcomes (recall) compared to traditional EMS—leading to improved “muscle memory.”
+
+![adaptive-ems](assets/img/adaptive-ems.jpg)
+
 ### SplitBody: Reducing Mental Workload while Multitasking via Muscle Stimulation
 Romain Nith, Yun Ho, Pedro Lopes. In Proc. CHI'24 (full paper)
 [CHI'24 paper](https://dl.acm.org/doi/full/10.1145/3613904.3642629)  [video](https://www.youtube.com/watch?v=J4tJ1FZ-QoA)
