@@ -4,12 +4,12 @@
 
 ## #HCI #body movement #perceptions
 
-**I am coming to CHI'25 at Yokohama. We are presenting our paper: Adaptive Electrical Muscle Stimulation Improves Muscle Memory with talk + demo! 
+**I am coming to CHI'25 at Yokohama. We are presenting our paper: Adaptive Electrical Muscle Stimulation Improves Muscle Memory with talk + demo!**
 
-Demo: Monday 6:00-8:00 pm, Tuesday + Wednesday morning coffee breaks
-Talk: Thursday, 1 May @ 9:12 am (Annex Hall F206)
+**Demo: Monday 6:00-8:00 pm, Tuesday + Wednesday morning coffee breaks
+Talk: Thursday, 1 May @ 9:12 am (Annex Hall F206)**
 
-Looking forward to meeting you all!**
+**Looking forward to meeting you all!**
 
 I am a first-year Computer Science PhD student at the University of Chicago, advised by [Professor Pedro Lopes](http://lab.plopes.org).
 
