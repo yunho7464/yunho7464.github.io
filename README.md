@@ -2,7 +2,7 @@
 
 [CV  ](https://drive.google.com/file/d/1seiBc8jvrxh-K9OGOiQ46J4EmxEAjkUj/view?usp=sharing)      [Google Scholar  ](https://scholar.google.com/citations?user=Rv2Z0EoAAAAJ&hl=en)      [Twitter  ](https://twitter.com/yun_yh_?s=21)      [LinkedIn  ](https://www.linkedin.com/in/yun-ho-78055b257?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
 
-I am a first-year Computer Science PhD student at the University of Chicago, advised by [Professor Pedro Lopes](http://lab.plopes.org).
+I am a second-year Computer Science PhD student at the University of Chicago, advised by [Professor Pedro Lopes](http://lab.plopes.org).
 
 My research focuses on Human-Computer Interaction. I play with body movements and perceptions, and I am curious about how people feel when a device **moves you**.
 
