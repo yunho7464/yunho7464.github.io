@@ -22,7 +22,7 @@ Electrical muscle stimulation (EMS) can assist in learning motor skills. However
 ### SplitBody: Reducing Mental Workload while Multitasking via Muscle Stimulation
 Romain Nith, **Yun Ho**, Pedro Lopes. In Proc. CHI'24 (full paper)
 
-<span style="color: #CD1C18;">Best Paper Award (top 1%) </span>
+**<span style="color: #CD1C18;">Best Paper Award (top 1%) </span>**
 
 [CHI'24 paper](https://dl.acm.org/doi/full/10.1145/3613904.3642629), [video](https://www.youtube.com/watch?v=J4tJ1FZ-QoA)
 
