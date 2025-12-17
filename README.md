@@ -2,11 +2,19 @@
 
 [CV  ](https://drive.google.com/file/d/1seiBc8jvrxh-K9OGOiQ46J4EmxEAjkUj/view?usp=sharing)      [Google Scholar  ](https://scholar.google.com/citations?user=Rv2Z0EoAAAAJ&hl=en)      [Twitter  ](https://twitter.com/yun_yh_?s=21)      [LinkedIn  ](https://www.linkedin.com/in/yun-ho-78055b257?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
 
-I am a second-year Computer Science PhD student at the University of Chicago, advised by [Professor Pedro Lopes](http://lab.plopes.org).
+<!-- I am a second-year Computer Science PhD student at the University of Chicago, advised by [Professor Pedro Lopes](http://lab.plopes.org).
 
 My research focuses on Human-Computer Interaction. I play with body movements and perceptions, and I am curious about how people feel when a device **moves you**.
 
-I have a background in psychology. Aside from HCI, I love dancing and [photography](https://www.instagram.com/flattenedcopy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==).
+I have a background in psychology. Aside from HCI, I love dancing and [photography](https://www.instagram.com/flattenedcopy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==). -->
+
+Yun Ho is a Computer Science Ph.D. student at University of Chicago, advised by [Professor Pedro Lopes](http://lab.plopes.org). 
+
+Her work focuses on Human-Computer Interaction. She explores how people make sense of and build relationship with
+physical assistance systems that communicate with users through proprioception (users’ own movements).
+
+Yun has published her work in top Human-Computer Interaction (HCI) venues, including ACM CHI, with a Best
+Paper Award (CHI 2024).
 
 
 ## Publications
