@@ -25,7 +25,7 @@ Siya Choudhary\*, Romain Nith\*, **Yun Ho\***, Jas Brooks, Mithil Guruvugari, Pe
 
 ![adaptive-ems](assets/img/adaptive-ems.jpg)
 
-Electrical muscle stimulation (EMS) can assist in learning motor skills. However, existing EMS systems provide static demonstration—actuating the correct movements, regardless of the user’s learning progress. Instead, we propose a novel adaptive-EMS that changes its guidance strategy based on the participant’s performance. The adaptive-EMS dynamically adjusts its guidance: (1) demonstrate by playing the entire sequence when errors are frequent; (2) correct by lifting incorrect fingers and actuating the correct one when errors are moderate; and (3) warn by lifting incorrect fingers when errors are low. We found that adaptive-EMS improved learning outcomes (recall) compared to traditional EMS—leading to improved “muscle memory.”
+Electrical muscle stimulation (EMS) can assist in learning motor skills. However, existing EMS systems provide static demonstration—actuating the correct movements, regardless of the user’s learning progress. Instead, we propose a novel **adaptive-EMS that changes its guidance strategy based on the participant’s performance**. The adaptive-EMS dynamically adjusts its guidance: (1) demonstrate by playing the entire sequence when errors are frequent; (2) correct by lifting incorrect fingers and actuating the correct one when errors are moderate; and (3) warn by lifting incorrect fingers when errors are low. We found that **adaptive-EMS improved learning outcomes (recall) compared to traditional EMS—leading to improved “muscle memory.**”
 
 
 ### SplitBody: Reducing Mental Workload while Multitasking via Muscle Stimulation
