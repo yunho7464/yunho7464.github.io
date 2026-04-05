@@ -10,14 +10,23 @@ I have a background in psychology. Aside from HCI, I love dancing and [photograp
 
 Yun Ho is a Computer Science Ph.D. student at University of Chicago, advised by [Professor Pedro Lopes](http://lab.plopes.org). 
 
-Her work focuses on Human-Computer Interaction. She explores how people make sense of and build relationship with
-physical assistance systems that communicate with users through proprioception (users’ own movements).
+Her work focuses on Human-Computer Interaction. She explores how people make sense of and build relationship with physical assistance systems that communicate with users through proprioception (users’ own movements).
 
-Yun has published her work in top Human-Computer Interaction (HCI) venues, including ACM CHI, with a Best
-Paper Award (CHI 2024).
+Yun has published her work in top Human-Computer Interaction (HCI) venues, including ACM CHI, with two Best Paper Awards (CHI 2024, CHI 2026).
 
 
 ## Publications
+### Generative Muscle Stimulation: Providing Users with Physical Assistance by Constraining Multimodal-AI with Embodied Knowledge
+**Yun Ho\***, Romain Nith\*, Peili Jiang, Steven He, Bruno Felalaga, Shan-Yuan Teng, Rhea Seeralan, Pedro Lopes. CHI'26 (full paper)
+
+**<span style="color: #CD1C18;">Best Paper Award (top 1%) </span>**
+
+[CHI'26 paper](https://embodied-ai.tech/static/pdfs/EmbodiedAI_CHI2026.pdf), [video](https://www.youtube.com/watch?v=pJM2Z8mmwAw), [website](https://embodied-ai.tech/)
+
+![embodied-ai](assets/img/genEMS.png)
+
+Electrical muscle stimulation (EMS) can support physical assistance (e.g., shaking a spray can before painting). However, EMS-assistance is highly-specialized because it is (1) fixed (e.g., one program for shaking spray cans, another for opening windows); and (2) non-contextual (e.g., a spray can for cooking dispenses cooking oil, not paint—shaking it is unnecessary). Instead, **we explore a different approach where muscle-stimulation instructions are generated considering the user's context (e.g., pose, location, surroundings).** The resulting system is more general—enabling unprecedented EMS-interactions (e.g., opening a pill-bottle) yet also replicating existing systems (e.g., Affordance++) without task-specific programming. It uses computer vision/large language models to generate EMS-instructions, constraining these to a muscle stimulation knowledge-base & joint-limits. In our user study, we found participants successfully completed physical tasks while guided by generative-EMS, even when EMS-instructions were (purposely) erroneous. **Participants understood generated-gestures and, even during forced-errors, understood partial-instructions, identified errors, and re-prompted the system.** We believe our concept marks a shift toward more general-purpose EMS-interfaces.
+
 ### Adaptive Electrical Muscle Stimulation Improves Muscle Memory
 Siya Choudhary\*, Romain Nith\*, **Yun Ho\***, Jas Brooks, Mithil Guruvugari, Pedro Lopes. CHI'25 (full paper)
 
