@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sense Titol II</title>
+ <script type="module" src="mediapipe_init.js" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #05050a;
+      --accent: #a8ff78;
+      --accent2: #ff6ec7;
+      --text: #e8e8e8;
+      --muted: #555;
+      --font-mono: 'JetBrains Mono', 'Fira Mono', monospace;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      overflow: hidden;
+    }
+
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+    }
+
+    /* ── HUD ── */
+    #hud {
+      position: fixed;
+      top: 20px; left: 24px;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      pointer-events: none;
+    }
+    .hud-title {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.9;
+    }
+    .hud-stat {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+    .hud-stat span { color: var(--text); }
+
+    /* ── Controls ── */
+    #controls {
+      position: fixed;
+      bottom: 20px; left: 24px;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .ctrl-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .ctrl-label {
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      width: 90px;
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 120px; height: 2px;
+      background: var(--muted);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .ctrl-val {
+      font-size: 9px;
+      color: var(--accent);
+      width: 32px;
+    }
+    .btn {
+      padding: 6px 14px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--muted);
+      background: transparent;
+      color: var(--text);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Overlay ── */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      gap: 18px;
+    }
+    .overlay-title {
+      font-size: clamp(24px, 5vw, 48px);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .overlay-sub {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-align: center;
+      max-width: 340px;
+      line-height: 1.8;
+    }
+    #load-status {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Overlay ── -->
+<div id="overlay">
+  <div class="overlay-title">Sense títol</div>
+  <div class="overlay-sub">
+    Joan Miró<br>
+    "As we walk, reality is reorganized."
+  </div>
+  <div id="load-status">loading image…</div>
+</div>
+
+<canvas id="particle-canvas"></canvas>
+<!-- <video id="webcam" style="position:fixed;bottom:16px;right:16px;width:180px;height:135px;
+  border-radius:6px;border:1px solid #333;z-index:10;object-fit:cover;
+  transform:scaleX(-1);opacity:0;pointer-events:none;" autoplay playsinline muted></video> -->
+
+<div id="cam-wrap" style="position:fixed;bottom:16px;right:16px;
+  width:180px;height:135px;z-index:10;opacity:0;pointer-events:none;
+  border-radius:6px;border:1px solid #333;overflow:hidden;">
+  <video id="webcam" style="width:100%;height:100%;object-fit:cover;
+    transform:scaleX(-1);" autoplay playsinline muted></video>
+  <canvas id="skeleton-canvas" style="position:absolute;inset:0;
+    width:100%;height:100%;transform:scaleX(-1);"></canvas>
+</div>
+
+<!-- original image reveal overlay -->
+<img id="reveal-img" src="" alt=""
+  style="position:fixed;inset:0;margin:auto;z-index:5;
+         object-fit:contain;max-width:85vw;max-height:85vh;
+         opacity:0;pointer-events:none;transition:none;">
+
+<!-- depth gesture prompt -->
+<div id="depth-prompt"
+  style="position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+         z-index:30;font-family:'JetBrains Mono','Fira Mono',monospace;
+         font-size:11px;letter-spacing:0.2em;color:#e8e8e8;
+         text-align:center;line-height:1.9;opacity:0;
+         pointer-events:none;transition:opacity 0.8s;">
+  Try to come closer and further away.<br>
+  See how your perception changes.
+</div>
+
+<!-- ── HUD ── -->
+<div id="hud">
+  <div class="hud-title">Image Particles</div>
+  <div class="hud-stat">particles <span id="h-count">0</span></div>
+  <div class="hud-stat">settled <span id="h-settled">0%</span></div>
+  <div class="hud-stat">fps <span id="h-fps">0</span></div>
+  <div class="hud-stat">pose <span id="h-pose">—</span></div>
+</div>
+
+<!-- ── Controls ── -->
+<div id="controls">
+  <div class="ctrl-row">
+    <span class="ctrl-label">speed</span>
+    <input type="range" id="sl-speed" min="1" max="20" value="8">
+    <span class="ctrl-val" id="v-speed">8</span>
+  </div>
+  <div class="ctrl-row">
+    <span class="ctrl-label">friction</span>
+    <input type="range" id="sl-friction" min="80" max="99" value="88">
+    <span class="ctrl-val" id="v-friction">0.88</span>
+  </div>
+  <div class="ctrl-row">
+    <span class="ctrl-label">scatter</span>
+    <input type="range" id="sl-scatter" min="1" max="10" value="4">
+    <span class="ctrl-val" id="v-scatter">4</span>
+  </div>
+  <div class="ctrl-row">
+    <span class="ctrl-label">particle px</span>
+    <input type="range" id="sl-pxsize" min="1" max="6" value="2">
+    <span class="ctrl-val" id="v-pxsize">2</span>
+  </div>
+  <div class="ctrl-row" style="gap:6px; margin-top:4px">
+    <!-- <button class="btn" id="btn-scatter" title="Scatter all particles">scatter</button> -->
+    <!-- <button class="btn" id="btn-explode" title="Explode outward">explode</button> -->
+    <button class="btn" id="btn-webcam" title="Toggle camera preview">cam</button>
+    <button class="btn" id="btn-hint" title="Show hint">hint</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  CONFIG
+// ═══════════════════════════════════════════════════════════
+const CFG = {
+  imageSrc:      "joanmiro_sense_titolII.jpg",
+  sampleStep:    4,
+  attractSpeed:  0.08,
+  friction:      0.88,
+  scatterRadius: 4,
+  particleSize:  2,
+  settleThresh:  1.5,
+  flowStrength:  60,
+  flowSpeed:     0.012,
+  flowFriction:  0.82,
+  blackThresh:   60,
+  whiteThresh:   660,
+  // pose-gate: how quickly motion energy decays per frame (0–1)
+  motionDecay:   0.80,
+  // minimum motion energy for a region to unlock particles (0–1)
+  motionThresh:  0.5,
+  // softness of the upper/lower boundary (higher = softer blend)
+  regionBlend:   0.18,
+};
+
+// ═══════════════════════════════════════════════════════════
+//  POSE MOTION STATE  (updated by detectPose each frame)
+// ═══════════════════════════════════════════════════════════
+// Two independent motion energy values, each 0–1, decaying over time.
+// upperEnergy: driven by nose, shoulders, elbows, wrists
+// lowerEnergy: driven by hips, knees, ankles
+const motion = { upper: 0, lower: 0 };
+
+// landmark indices → which energy bucket they feed
+const UPPER_LM = [0, 11, 12, 13, 14, 15, 16];
+const LOWER_LM = [23, 24, 25, 26, 27, 28];
+const ALL_LM   = [...UPPER_LM, ...LOWER_LM];
+
+let poseLandmarker = null;
+let prevLandmarks  = null;   // previous frame landmarks for velocity
+let lastVideoTime  = -1;
+const video = document.getElementById("webcam");
+
+// ═══════════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════════
+const canvas = document.getElementById("particle-canvas");
+const ctx    = canvas.getContext("2d");
+
+let particles  = [];
+let W = 0, H = 0;
+let imgW = 0, imgH = 0;
+let offsetX = 0, offsetY = 0;
+let animId = null;
+let lastMs = 0, fps = 0, fpsCount = 0, fpsTimer = 0;
+let poseReady = false; // true only once camera + model are both live
+let idleStart = null;        // set when particles first appear
+const IDLE_DURATION = 8000;  // ms of pure random wandering before homing begins
+
+// ─── Depth / approach tracking ────────────────────────────
+// We estimate viewer distance by averaging shoulder-to-shoulder
+// pixel span (landmark 11→12). Wider span = closer to camera.
+let prevSpan      = null;   // shoulder span last frame
+let depthDir      = 0;      // +1 = approaching, -1 = retreating, 0 = still
+let crossings     = 0;      // number of direction reversals counted
+let spanAtTurn    = null;   // span value at the last direction reversal
+const SPAN_SPEED  = 0.007;  // min per-frame delta to register movement (keeps noise out)
+const SPAN_DIST   = 0.07;   // min total span change between turns to count as a crossing
+
+const CROSS_NEED  = 8;      // how many back-and-forth crosses required
+
+// ─── Stage machine ────────────────────────────────────────
+// "flow"      → optical flow running, waiting for depth gesture
+// "prompted"  → hint text visible (15 s elapsed without depth gesture)
+// "counting"  → viewer doing the depth gesture, counting crossings
+// "freeze"    → crossings met, 3-second pause
+// "reveal"    → original image fading in
+let stage          = "flow";
+let flowStartTime  = null;   // set when first particle settles into flow
+let freezeStart    = null;   // timestamp when freeze began
+let revealAlpha    = 0;      // 0→1 opacity of the image overlay
+let promptVisible  = false;
+
+// ═══════════════════════════════════════════════════════════
+//  PARTICLE CLASS
+// ═══════════════════════════════════════════════════════════
+class Particle {
+  constructor(tx, ty, r, g, b, normY) {
+    this.tx    = tx;
+    this.ty    = ty;
+    this.r     = r;
+    this.g     = g;
+    this.b     = b;
+    this.normY = normY; // 0 = top of image, 1 = bottom
+
+    // black = luminance below threshold — stay fixed at target
+    this.isBlack = (r + g + b) < CFG.blackThresh;
+    // white/near-white = background paper — also excluded from flow
+    const isWhite = (r + g + b) > CFG.whiteThresh;
+    // background = the mid-tone texture (not black stroke, not white paper)
+    this.isBackground = !this.isBlack && !isWhite;
+
+    // flow target: a point pulled slightly toward image center
+    // computed once after settle, set in startFlow()
+    this.fx = tx;
+    this.fy = ty;
+    this.flowPhase = false; // true = drifting inward after settling
+
+    if (this.isBlack) {
+      this.x = tx; this.y = ty;
+      this.vx = 0;  this.vy = 0;
+      this.settled = true;
+    } else {
+      // random start + random initial kick
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.vx = (Math.random() - 0.5) * CFG.scatterRadius * 2;
+      this.vy = (Math.random() - 0.5) * CFG.scatterRadius * 2;
+      // random delay before homing begins (frames)
+      this.delay = Math.floor(Math.random() * 120);
+      this.settled = false;
+    }
+  }
+
+  scatter() {
+    if (this.isBlack) return;
+    this.x  = Math.random() * W;
+    this.y  = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 6;
+    this.vy = (Math.random() - 0.5) * 6;
+    this.delay = Math.floor(Math.random() * 120);
+    this.settled = false;
+  }
+
+  explode(cx, cy) {
+    if (this.isBlack) return;
+    const dx = this.x - cx;
+    const dy = this.y - cy;
+    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+    const force = 15 + Math.random() * 10;
+    this.vx += (dx / dist) * force;
+    this.vy += (dy / dist) * force;
+    this.settled = false;
+  }
+
+  // called once particle has settled — compute inward drift target
+  startFlow(cx, cy) {
+    if (!this.isBackground) return;
+    const angle = Math.atan2(cy - this.ty, cx - this.tx) + (Math.random() - 0.5) * 0.6;
+    const pull  = CFG.flowStrength * (0.6 + Math.random() * 0.8);
+    this.fx = this.tx + Math.cos(angle) * pull;
+    this.fy = this.ty + Math.sin(angle) * pull;
+    this.flowPhase  = true;
+    this.flowReturn = false;
+    this.settled    = false;
+    this.vx = (Math.random() - 0.5) * 0.5;
+    this.vy = (Math.random() - 0.5) * 0.5;
+  }
+
+  update() {
+    if (this.settled) return;
+
+    // ── flow phase: drift to fx/fy then return to tx/ty ──
+    if (this.flowPhase) {
+      const tx = this.flowReturn ? this.tx : this.fx;
+      const ty = this.flowReturn ? this.ty : this.fy;
+      const dx = tx - this.x;
+      const dy = ty - this.y;
+      this.vx += dx * CFG.flowSpeed;
+      this.vy += dy * CFG.flowSpeed;
+      this.vx *= CFG.flowFriction;
+      this.vy *= CFG.flowFriction;
+      this.x  += this.vx;
+      this.y  += this.vy;
+      const d2 = dx * dx + dy * dy;
+      if (d2 < 1.5 && this.vx * this.vx + this.vy * this.vy < 0.04) {
+        if (!this.flowReturn) {
+          // reached drift point — now head back
+          this.flowReturn = true;
+        } else {
+          // back home — rest briefly then flow again
+          this.x = this.tx; this.y = this.ty;
+          this.vx = 0; this.vy = 0;
+          this.flowPhase  = false;
+          this.flowReturn = false;
+          // use a frame countdown instead of setTimeout
+          this.flowWait = 40 + Math.floor(Math.random() * 80);
+        }
+      }
+      return;
+    }
+
+    // ── flow wait countdown ──
+    if (this.flowWait > 0) {
+      this.flowWait--;
+      if (this.flowWait === 0) this.startFlow(W / 2, H / 2);
+      return;
+    }
+
+    // ── initial wander delay ──
+    if (this.delay > 0) {
+      // during global idle OR if pose gate is closed — keep wandering randomly
+      const globalIdle = !idleStart || (performance.now() - idleStart < IDLE_DURATION);
+      if (globalIdle || !poseGate(this.normY)) {
+        this.vx += (Math.random() - 0.5) * 5;
+        this.vy += (Math.random() - 0.5) * 5;
+        this.vx *= CFG.friction;
+        this.vy *= CFG.friction;
+        this.x  += this.vx;
+        this.y  += this.vy;
+        if (this.x < 0) this.x += W; if (this.x > W) this.x -= W;
+        if (this.y < 0) this.y += H; if (this.y > H) this.y -= H;
+        return;
+      }
+  
+      this.delay--;
+      // strong random kick — visibly chaotic while viewer moves
+      this.vx += (Math.random() - 0.5) * 5;
+      this.vy += (Math.random() - 0.5) * 5;
+      this.vx *= CFG.friction;
+      this.vy *= CFG.friction;
+      this.x  += this.vx;
+      this.y  += this.vy;
+      if (this.x < 0) this.x += W; if (this.x > W) this.x -= W;
+      if (this.y < 0) this.y += H; if (this.y > H) this.y -= H;
+      return;
+    }
+
+    // ── homing spring — only move if region is active ──
+    if (!poseGate(this.normY)) {
+      // still damp velocity so stale kicks don't accumulate
+      this.vx *= CFG.friction;
+      this.vy *= CFG.friction;
+      return;
+    }
+    const dx = this.tx - this.x;
+    const dy = this.ty - this.y;
+    this.vx += dx * CFG.attractSpeed;
+    this.vy += dy * CFG.attractSpeed;
+    // inject turbulence proportional to current motion energy
+    const energy = this.normY < 0.5 ? motion.upper : motion.lower;
+    this.vx += (Math.random() - 0.5) * energy * 1.5;
+    this.vy += (Math.random() - 0.5) * energy * 1.5;
+    this.vx *= CFG.friction;
+    this.vy *= CFG.friction;
+    this.x  += this.vx;
+    this.y  += this.vy;
+
+    const d2 = dx * dx + dy * dy;
+    if (d2 < CFG.settleThresh * CFG.settleThresh &&
+        this.vx * this.vx + this.vy * this.vy < 0.04) {
+      this.x = this.tx; this.y = this.ty;
+      this.vx = 0; this.vy = 0;
+      if (this.isBackground) {
+        this.flowWait = 20 + Math.floor(Math.random() * 60);
+      } else {
+        this.settled = true;
+      }
+    }
+  }
+
+  draw() {
+    ctx.fillStyle = `rgb(${this.r},${this.g},${this.b})`;
+    ctx.fillRect(this.x, this.y, CFG.particleSize, CFG.particleSize);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  POSE GATE
+//  Returns true if the particle at normY (0=top,1=bottom)
+//  should be allowed to move, based on current motion energy.
+//  Soft boundary: upper/lower energies blend over regionBlend band.
+// ═══════════════════════════════════════════════════════════
+function poseGate(normY) {
+  // freeze everything until camera + model are confirmed live
+  if (!poseReady) return false;
+
+  const blend = CFG.regionBlend;
+  const t = Math.max(0, Math.min(1, (normY - 0.5 + blend) / (blend * 2)));
+  const energy = motion.upper * (1 - t) + motion.lower * t;
+
+  return energy > CFG.motionThresh && Math.random() < energy;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  POSE DETECTION  (called each render frame)
+// ═══════════════════════════════════════════════════════════
+function detectPose(now) {
+  if (!poseLandmarker || video.readyState < 2) {
+    // no pose — decay energies
+    motion.upper *= CFG.motionDecay;
+    motion.lower *= CFG.motionDecay;
+    return;
+  }
+  if (video.currentTime === lastVideoTime) return;
+  lastVideoTime = video.currentTime;
+
+  const results = poseLandmarker.detectForVideo(video, now);
+  // ── draw skeleton on preview canvas ──
+  const skelCanvas = document.getElementById("skeleton-canvas");
+  const skelCtx    = skelCanvas.getContext("2d");
+  skelCanvas.width  = video.videoWidth  || 640;
+  skelCanvas.height = video.videoHeight || 480;
+  skelCtx.clearRect(0, 0, skelCanvas.width, skelCanvas.height);
+  if (results.landmarks && results.landmarks.length > 0) {
+    const drawUtils = new DrawingUtils(skelCtx);
+    drawUtils.drawConnectors(
+      results.landmarks[0],
+      PoseLandmarker.POSE_CONNECTIONS,
+      { color: "#a8ff78", lineWidth: 1.5 }
+    );
+    drawUtils.drawLandmarks(
+      results.landmarks[0],
+      { color: "#ff6ec7", lineWidth: 1, radius: 2 }
+    );
+  }
+
+  if (results.landmarks && results.landmarks.length > 0) {
+    const lms = results.landmarks[0];
+    let upperDelta = 0, upperCount = 0;
+    let lowerDelta = 0, lowerCount = 0;
+
+    if (prevLandmarks) {
+      for (const i of UPPER_LM) {
+        if (lms[i] && prevLandmarks[i] && lms[i].visibility > 0.4) {
+          const dx = lms[i].x - prevLandmarks[i].x;
+          const dy = lms[i].y - prevLandmarks[i].y;
+          upperDelta += Math.sqrt(dx * dx + dy * dy);
+          upperCount++;
+        }
+      }
+      for (const i of LOWER_LM) {
+        if (lms[i] && prevLandmarks[i] && lms[i].visibility > 0.4) {
+          const dx = lms[i].x - prevLandmarks[i].x;
+          const dy = lms[i].y - prevLandmarks[i].y;
+          lowerDelta += Math.sqrt(dx * dx + dy * dy);
+          lowerCount++;
+        }
+      }
+    }
+
+    // normalise deltas and accumulate into energy (clamped 0–1)
+    const uRaw = upperCount ? upperDelta / upperCount : 0;
+    const lRaw = lowerCount ? lowerDelta / lowerCount : 0;
+    // scale: typical frame delta ~0.005–0.05 → map to visible range
+    motion.upper = Math.min(1, motion.upper * CFG.motionDecay + uRaw * 40);
+    motion.lower = Math.min(1, motion.lower * CFG.motionDecay + lRaw * 40);
+
+    prevLandmarks = lms.map(l => ({ x: l.x, y: l.y, visibility: l.visibility }));
+
+    // ── depth / approach detection ──────────────────────
+    // use shoulder span as a proxy for distance to camera
+    if (lms[11] && lms[12] &&
+        lms[11].visibility > 0.5 && lms[12].visibility > 0.5) {
+      const span = Math.abs(lms[11].x - lms[12].x);
+      if (prevSpan !== null && (stage === "flow" || stage === "prompted" || stage === "counting")) {
+        const delta = span - prevSpan;
+        if (Math.abs(delta) > SPAN_SPEED) {
+          const newDir = delta > 0 ? 1 : -1;
+          if (newDir !== depthDir && depthDir !== 0 && flowStartTime) {
+            // only count if viewer traveled far enough since last turn
+            if (spanAtTurn === null || Math.abs(span - spanAtTurn) >= SPAN_DIST) {
+              crossings++;
+              spanAtTurn = span;
+              if (stage === "flow" || stage === "prompted") stage = "counting";
+              setPrompt(false);
+            }
+          }
+          depthDir = newDir;
+          if (crossings >= CROSS_NEED && stage === "counting") {
+            stage = "freeze";
+            freezeStart = performance.now(); // always set together, never null
+            for (const p of particles) {
+              if (p.isBackground) { p.flowPhase = false; p.flowWait = 999999; p.settled = true; }
+            }
+          }
+        }
+      }
+      prevSpan = span;
+    }
+
+    document.getElementById("h-pose").textContent =
+      `↑${motion.upper.toFixed(2)} ↓${motion.lower.toFixed(2)} ✕${crossings}`;
+  } else {
+    motion.upper *= CFG.motionDecay;
+    motion.lower *= CFG.motionDecay;
+    prevLandmarks = null;
+    document.getElementById("h-pose").textContent = "no pose";
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  MEDIAPIPE LOADER
+// ═══════════════════════════════════════════════════════════
+async function loadPoseModel() {
+  const status = document.getElementById("load-status");
+  try {
+    const vision = await FilesetResolver.forVisionTasks(
+      "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm"
+    );
+    poseLandmarker = await PoseLandmarker.createFromOptions(vision, {
+      baseOptions: {
+        modelAssetPath: "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task",
+        delegate: "GPU",
+      },
+      runningMode: "VIDEO",
+      numPoses: 1,
+      minPoseDetectionConfidence: 0.5,
+      minPosePresenceConfidence:  0.5,
+      minTrackingConfidence: 0.5,
+    });
+    status.textContent = "pose model ready — starting camera…";
+    await startCamera();
+  } catch (e) {
+    console.warn("MediaPipe unavailable:", e);
+    poseReady = true; // no camera — let particles move freely as fallback
+    document.getElementById("h-pose").textContent = "no camera";
+    document.getElementById("load-status").textContent = "no camera — particles move freely";
+  }
+}
+
+async function startCamera() {
+  const stream = await navigator.mediaDevices.getUserMedia({
+    video: { width: 640, height: 480, facingMode: "user" }, audio: false
+  });
+  video.srcObject = stream;
+  await new Promise(res => video.addEventListener("loadeddata", res, { once: true }));
+  poseReady = true; // camera live + model already loaded → unlock gate
+  document.getElementById("h-pose").textContent = "ready";
+}
+
+// ═══════════════════════════════════════════════════════════
+//  SAMPLE IMAGE → PARTICLES
+// ═══════════════════════════════════════════════════════════
+function buildParticles(imageData, iw, ih) {
+  particles = [];
+  const data = imageData.data;
+  const step = CFG.sampleStep;
+
+  for (let y = 0; y < ih; y += step) {
+    for (let x = 0; x < iw; x += step) {
+      const i = (y * iw + x) * 4;
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      const a = data[i + 3];
+
+      if (a < 20) continue; // skip transparent
+
+      // target position: centered on screen
+      const tx = offsetX + x;
+      const ty = offsetY + y;
+      const normY = ih > 1 ? y / (ih - 1) : 0.5;
+
+      particles.push(new Particle(tx, ty, r, g, b, normY));
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  RESIZE
+// ═══════════════════════════════════════════════════════════
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", () => {
+  resize();
+  // recompute offsets & targets
+  if (imgW && imgH) {
+    offsetX = Math.round((W - imgW) / 2);
+    offsetY = Math.round((H - imgH) / 2);
+    for (const p of particles) {
+      p.tx += offsetX - (W / 2 - imgW / 2); // shift targets with new center
+    }
+  }
+});
+resize();
+
+// ─── Prompt helper ────────────────────────────────────────
+function setPrompt(visible) {
+  if (promptVisible === visible) return;
+  promptVisible = visible;
+  document.getElementById("depth-prompt").style.opacity = visible ? "1" : "0";
+}
+
+// ═══════════════════════════════════════════════════════════
+//  RENDER LOOP
+// ═══════════════════════════════════════════════════════════
+function loop(now) {
+  animId = requestAnimationFrame(loop);
+
+  // FPS
+  fpsCount++;
+  fpsTimer += now - lastMs;
+  if (fpsTimer >= 1000) {
+    fps = fpsCount;
+    fpsCount = 0;
+    fpsTimer -= 1000;
+    document.getElementById("h-fps").textContent = fps;
+  }
+  lastMs = now;
+
+  // Pose detection (updates motion.upper / motion.lower + depth crossings)
+  detectPose(now);
+
+  // ── Stage: freeze (3-second pause after crossings met) ──
+  if (stage === "freeze") {
+    ctx.fillStyle = "rgba(5,5,10,0.25)";
+    ctx.fillRect(0, 0, W, H);
+    drawSettled();
+    if (freezeStart !== null && now - freezeStart >= 10000) {
+      stage = "reveal";
+      const img = document.getElementById("reveal-img");
+      img.src = CFG.imageSrc;
+    }
+    return;
+  }
+
+  // ── Stage: reveal (image fades in over canvas) ──
+  if (stage === "reveal") {
+    revealAlpha = Math.min(1, revealAlpha + 0.004); // ~4 s fade
+    document.getElementById("reveal-img").style.opacity = revealAlpha;
+    // keep drawing particles underneath but freeze flow
+    ctx.fillStyle = "rgba(5,5,10,0.05)";
+    ctx.fillRect(0, 0, W, H);
+    drawSettled();
+    return;
+  }
+
+  // ── Stage: flow / prompted / counting (normal loop) ──
+
+  // 15-second prompt timer — starts when flowStartTime is set
+  if (flowStartTime && stage === "flow" &&
+      now - flowStartTime >= 20000) {
+    stage = "prompted";
+    setPrompt(true);
+  }
+
+  // Clear
+  ctx.fillStyle = "rgba(5,5,10,0.25)";
+  ctx.fillRect(0, 0, W, H);
+
+  // Update & draw — batch by color to minimize fillStyle changes
+  let settled = 0;
+  const batches = new Map();
+  for (const p of particles) {
+    p.update();
+    if (p.settled || p.flowPhase === false && p.flowWait === 0) settled++;
+    const key = `${p.r},${p.g},${p.b}`;
+    let arr = batches.get(key);
+    if (!arr) { arr = []; batches.set(key, arr); }
+    arr.push(p.x, p.y);
+  }
+  const sz = CFG.particleSize;
+  for (const [key, coords] of batches) {
+    ctx.fillStyle = `rgb(${key})`;
+    for (let i = 0; i < coords.length; i += 2) {
+      ctx.fillRect(coords[i], coords[i + 1], sz, sz);
+    }
+  }
+  
+  if (!idleStart) idleStart = now;
+
+  // Detect when first background particle enters flow → start 15-s clock
+  if (!flowStartTime) {
+    for (const p of particles) {
+     if (p.flowPhase) { flowStartTime = now; break; }
+    }
+  }
+
+  // HUD — only update DOM every 20 frames
+  if (fpsCount % 20 === 0) {
+    document.getElementById("h-count").textContent = particles.length;
+    document.getElementById("h-settled").textContent =
+      particles.length ? Math.round(settled / particles.length * 100) + "%" : "0%";
+  }
+}
+
+// draw only settled particles (used during freeze/reveal)
+function drawSettled() {
+  const batches = new Map();
+  for (const p of particles) {
+    const key = `${p.r},${p.g},${p.b}`;
+    let arr = batches.get(key);
+    if (!arr) { arr = []; batches.set(key, arr); }
+    arr.push(p.x, p.y);
+  }
+  const sz = CFG.particleSize;
+  for (const [key, coords] of batches) {
+    ctx.fillStyle = `rgb(${key})`;
+    for (let i = 0; i < coords.length; i += 2) {
+      ctx.fillRect(coords[i], coords[i + 1], sz, sz);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  LOAD IMAGE & START
+// ═══════════════════════════════════════════════════════════
+function loadImage() {
+  const status = document.getElementById("load-status");
+  const img    = new Image();
+
+  img.onload = () => {
+    // Scale image to fit screen if needed (max 80% of screen)
+    const maxW = Math.floor(W * 0.85);
+    const maxH = Math.floor(H * 0.85);
+    const scale = Math.min(1, maxW / img.width, maxH / img.height);
+    imgW = Math.floor(img.width  * scale);
+    imgH = Math.floor(img.height * scale);
+    offsetX = Math.round((W - imgW) / 2);
+    offsetY = Math.round((H - imgH) / 2);
+
+    // Draw image to offscreen canvas to sample pixels
+    const off = document.createElement("canvas");
+    off.width  = imgW;
+    off.height = imgH;
+    const offCtx = off.getContext("2d");
+    offCtx.drawImage(img, 0, 0, imgW, imgH);
+
+    const imageData = offCtx.getImageData(0, 0, imgW, imgH);
+    buildParticles(imageData, imgW, imgH);
+
+    status.textContent = `${particles.length} particles ready`;
+
+    // Start pose model loading in parallel (non-blocking)
+    if (window._mpReady) loadPoseModel();
+    else window.addEventListener("mpReady", loadPoseModel, { once: true });
+
+    // Hide overlay and start
+    setTimeout(() => {
+      document.getElementById("overlay").style.display = "none";
+      requestAnimationFrame(loop);
+    }, 5000);
+  };
+
+  img.onerror = () => {
+    status.textContent = `could not load "${CFG.imageSrc}" — is it in the same folder?`;
+  };
+
+  img.src = CFG.imageSrc;
+}
+
+loadImage();
+
+// ═══════════════════════════════════════════════════════════
+//  CONTROLS
+// ═══════════════════════════════════════════════════════════
+function wire(id, valId, cfgKey, transform) {
+  const sl = document.getElementById(id);
+  const vl = document.getElementById(valId);
+  sl.addEventListener("input", () => {
+    const v = transform ? transform(+sl.value) : +sl.value;
+    CFG[cfgKey] = v;
+    vl.textContent = transform ? v : +sl.value;
+  });
+}
+
+wire("sl-speed",   "v-speed",   "attractSpeed",  v => +(v / 100).toFixed(2));
+wire("sl-friction","v-friction","friction",       v => +(v / 100).toFixed(2));
+wire("sl-scatter", "v-scatter", "scatterRadius",  null);
+wire("sl-pxsize",  "v-pxsize",  "particleSize",   null);
+
+// document.getElementById("btn-scatter").addEventListener("click", () => {
+//   for (const p of particles) p.scatter();
+// });
+
+// document.getElementById("btn-explode").addEventListener("click", () => {
+//   const cx = W / 2, cy = H / 2;
+//   for (const p of particles) p.explode(cx, cy);
+// });
+// document.getElementById("btn-webcam").addEventListener("click", () => {
+//   const v = document.getElementById("webcam");
+//   const showing = v.style.opacity === "0.75";
+//   v.style.opacity = showing ? "0" : "0.75";
+//   document.getElementById("btn-webcam").classList.toggle("active", !showing);
+// });
+
+document.getElementById("btn-webcam").addEventListener("click", () => {
+  const wrap = document.getElementById("cam-wrap");
+  const showing = wrap.style.opacity === "0.75";
+  wrap.style.opacity = showing ? "0" : "0.75";
+  document.getElementById("btn-webcam").classList.toggle("active", !showing);
+});
+document.getElementById("btn-hint").addEventListener("click", () => {
+  setPrompt(!promptVisible);
+});
+
+
+</script>
+</body>
+</html>
