@@ -4,6 +4,6 @@
 @import "{{ site.theme }}";
 
 /* Hide "View My GitHub Profile" button */
-#downloads .btn {
+header p.view {
   display: none !important;
 }
